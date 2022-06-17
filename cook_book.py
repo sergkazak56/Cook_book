@@ -1,5 +1,4 @@
 from pprint import pprint
-import sys
 
 def cook_book_from_file(file_path):
     '''
