@@ -26,7 +26,7 @@ def cook_book_from_file(file_path):
             f_cook_book.readline()
     return cook_book
 
-def get_shop_list(cook_book, dishes, person_count = 1):
+def get_shop_list(cook_book, dishes, person_count = 1, file_path = 'files\shop_list.txt'):
     '''
     :param cook_book - словарь из блюд и их инградиентов
     :param dishes - список блюд, для которых надо составить список покупки
@@ -35,7 +35,6 @@ def get_shop_list(cook_book, dishes, person_count = 1):
     Функция выводит список необходимых покупок в словарь cook_book и в файл files\shop_list.txt
     для удобства распечатывания
     '''
-    file_path = 'files\shop_list.txt'
     shop_dict = {}
     if not dishes or not cook_book:
         return
