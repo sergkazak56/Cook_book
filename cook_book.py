@@ -1,6 +1,6 @@
 from pprint import pprint
 
-# Процедурный метод из
+# Процедурный метод
 
 def get_cook_book_from_file(file_path):
     '''

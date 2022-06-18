@@ -2,6 +2,8 @@ from pprint import pprint
 import os
 import copy
 
+# Объектно-ориентированный метод
+
 class Dish():
     '''
     Класс Dish (блюдо)
@@ -27,6 +29,7 @@ class Dish():
     def ingradients_to_list(self):
         '''
         :return: ingradients_list - преобразованный в список словарь инградиетов (ingradients) блюда;
+        Метод преобразует словарь инградиентов в список словарей.
         '''
         ingradients_list = []
         for ingradient, amount in self.ingradients.items():
@@ -202,4 +205,5 @@ if dishes_list:
     print(f"Выбранные блюда: {str(list_of_dishes_names).strip('[]')}:\n")
     pprint(get_shop_list(dishes_list, list_of_dishes_names, count_persons))
     print("=" * 60)
-
+    print()
+    print(dishes_list[2])
