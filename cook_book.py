@@ -1,6 +1,8 @@
 from pprint import pprint
 
-def cook_book_from_file(file_path):
+# Процедурный метод из
+
+def get_cook_book_from_file(file_path):
     '''
     :param: file_path - путь к файлу с данными по блюдам
     :return: cook-book - словарь из блюд и их инградиентов
@@ -58,8 +60,12 @@ def get_shop_list(cook_book, dishes, person_count = 1, file_path = 'files\shop_l
 file_path = 'files\cook_book.txt'
 print("Задача № 1 формирования словаря cook_book из файла:\n")
 print('cook_book =')
-pprint(cook_book_from_file(file_path))
+cook_book = get_cook_book_from_file(file_path)
+pprint(cook_book)
 print("=" * 60)
-print("\nЗадача № 2 формирования списка закупок на количество клиентов:\n")
-pprint(get_shop_list(cook_book_from_file(file_path), ['Омлет', 'Фахитос'], 3))
+list_of_dishes_names =  ['Фахитос', 'Омлет']
+count_persons = 3
+print(f"\nЗадача № 2 формирования списка закупок на количество клиентов - {count_persons} чел.")
+print(f"Выбранные блюда: {str(list_of_dishes_names).strip('[]')}:\n")
+pprint(get_shop_list(cook_book, list_of_dishes_names, count_persons))
 print("=" * 60)
