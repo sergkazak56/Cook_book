@@ -20,7 +20,7 @@ def get_cook_book_from_file(file_path):
                 ingradient_dict = {}
                 ingradient_list = f_cook_book.readline().strip().split(' | ')
                 ingradient_dict['ingredient_name'] = ingradient_list[0]
-                ingradient_dict['quantity'] = int(ingradient_list[1])
+                ingradient_dict['quantity'] = float(ingradient_list[1])
                 ingradient_dict['measure'] = ingradient_list[2]
                 ingradients.append(ingradient_dict)
             cook_book[dish_name] = ingradients

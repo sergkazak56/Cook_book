@@ -1,6 +1,8 @@
 from pprint import pprint
 import os
 import copy
+import json
+import csv
 
 # Объектно-ориентированный метод
 
@@ -146,7 +148,7 @@ def dishes_list_from_file(file_path):
             quantity_ingradients = int(f_cook_book.readline().strip())
             for item in range(quantity_ingradients):
                 ingradient_list = f_cook_book.readline().strip().split(' | ')
-                new_dish.add_ingradient(ingradient_list[0], int(ingradient_list[1]), ingradient_list[2])
+                new_dish.add_ingradient(ingradient_list[0], float(ingradient_list[1]), ingradient_list[2])
             f_cook_book.readline()
             dishes_list.append(new_dish)
     return dishes_list
@@ -162,6 +164,7 @@ def get_cook_book(dishes_list):
     cook_book = {}
     for dish in dishes_list:
         cook_book[dish.name] = dish.ingradients_to_list()
+    make_json_cook_book({'Поваренная книга':cook_book})
     return cook_book
 
 def returned_dish(dishes_list, name):
@@ -192,6 +195,25 @@ def get_shop_list(dishes_list, list_of_dishes_names, count_persons = 1):
         sum_dish += returned_dish(dishes_list, dish_name)
     return sum_dish.shop_dict(count_persons)
 
+# Проба работы с форматами json и csv
+def make_json_cook_book(cook_book: dict):
+    with open('files\cook_book.json', 'w', encoding='utf-8') as json_f:
+        json.dump(cook_book, json_f, ensure_ascii=False, indent=4)
+
+def make_csv_cook_book(dishes_list):
+    csv_list = []
+    csv_list.append(['Поваренная книга'])
+    csv_list.append(['Блюдо', 'Инградиенты', 'Количество', 'Ед.изм.'])
+    for dish in dishes_list:
+        csv_list.append([dish.name])
+        for ingradient, amount in dish.ingradients.items():
+            amount_excel = str(amount['quantity']).replace('.', ',')
+            csv_list.append(['', ingradient, amount_excel, amount['measure']])
+    csv.register_dialect("cb_csv", delimiter=";", quoting=csv.QUOTE_NONE, escapechar="\\", lineterminator='\n')
+    with open('files\cook_book.csv', 'w', encoding='cp1251') as csv_f:
+        writer = csv.writer(csv_f, 'cb_csv')
+        writer.writerows(csv_list)
+
 file_path = 'files\cook_book.txt'
 dishes_list = dishes_list_from_file(file_path)
 if dishes_list:
@@ -207,3 +229,4 @@ if dishes_list:
     print("=" * 60)
     print()
     print(dishes_list[2])
+make_csv_cook_book(dishes_list)
